@@ -1,0 +1,107 @@
+name: Feature Request
+description: Suggest a new feature or enhancement for BlackRoad
+title: "[FEATURE]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! BlackRoad is a routing company, not an AI company.
+        Features should align with our core philosophy: orchestrate existing intelligence through smart routing.
+
+  - type: dropdown
+    id: organization
+    attributes:
+      label: Target Organization
+      description: Which BlackRoad organization should own this feature?
+      options:
+        - BlackRoad-OS (Core OS, operator, infrastructure)
+        - BlackRoad-AI (AI models, routing, inference)
+        - BlackRoad-Cloud (Cloud services, deployment)
+        - BlackRoad-Labs (Research, experiments)
+        - BlackRoad-Security (Security tools, auditing)
+        - BlackRoad-Foundation (CRM, business tools)
+        - BlackRoad-Media (Content, publishing)
+        - BlackRoad-Hardware (IoT, ESP32, Pi projects)
+        - BlackRoad-Education (Learning, documentation)
+        - BlackRoad-Gov (Governance, voting)
+        - BlackRoad-Interactive (Games, 3D, metaverse)
+        - BlackRoad-Archive (Storage, backup)
+        - BlackRoad-Studio (Design, creative tools)
+        - BlackRoad-Ventures (Business, commerce)
+        - Blackbox-Enterprises (Enterprise solutions)
+        - Cross-organization / Unsure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: What type of feature is this?
+      options:
+        - Routing Logic
+        - API Integration
+        - Hardware/Edge
+        - Security
+        - Developer Experience
+        - Documentation
+        - Infrastructure
+        - User Interface
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve? Is your feature request related to a problem?
+      placeholder: "I'm always frustrated when..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like. Remember - we route to existing tools, we don't build from scratch.
+      placeholder: |
+        Example: Route physics calculations to NumPy/SciPy instead of LLMs
+        Example: Add Salesforce API endpoint for customer lookups
+    validations:
+      required: true
+
+  - type: textarea
+    id: routing
+    attributes:
+      label: Routing Pattern
+      description: How should requests be routed for this feature?
+      placeholder: |
+        [User Request] -> [Operator] -> [?] -> [Answer]
+        What existing tool/service should handle this?
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative solutions or features you've considered.
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Nice to have
+        - Would improve workflow
+        - Important for my use case
+        - Critical blocker
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context, mockups, or references about the feature request.
