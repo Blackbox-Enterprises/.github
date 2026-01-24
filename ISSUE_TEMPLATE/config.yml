@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: BlackRoad Architecture
+    url: https://github.com/Blackbox-Enterprises/.github/blob/main/BLACKROAD_ARCHITECTURE.md
+    about: Read the architecture document before proposing major changes
+  - name: Security Vulnerability
+    url: https://github.com/Blackbox-Enterprises/.github/security/advisories/new
+    about: Report security vulnerabilities privately
