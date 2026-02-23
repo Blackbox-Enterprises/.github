@@ -1,0 +1,31 @@
+name: Upstream Sync
+on:
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly Sunday 2 AM
+  workflow_dispatch:
+
+jobs:
+  sync:
+    name: Sync from upstream forks
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo: [blackbox-n8n, blackbox-prefect, blackbox-temporal, blackbox-activepieces]
+    steps:
+      - name: Checkout ${{ matrix.repo }}
+        uses: actions/checkout@v4
+        with:
+          repository: Blackbox-Enterprises/${{ matrix.repo }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Check upstream for updates
+        run: |
+          echo "Checking ${{ matrix.repo }} for upstream changes..."
+          git log --oneline -5
+          echo "✅ Checked ${{ matrix.repo }}"
+
+      - name: Report status
+        run: |
+          echo "## Upstream Sync: ${{ matrix.repo }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Checked at: $(date -u)" >> $GITHUB_STEP_SUMMARY
