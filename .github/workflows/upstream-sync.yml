@@ -13,7 +13,7 @@ jobs:
         repo: [blackbox-n8n, blackbox-prefect, blackbox-temporal, blackbox-activepieces]
     steps:
       - name: Checkout ${{ matrix.repo }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           repository: Blackbox-Enterprises/${{ matrix.repo }}
           token: ${{ secrets.GITHUB_TOKEN }}
