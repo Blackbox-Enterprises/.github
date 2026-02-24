@@ -1,25 +1,38 @@
 <div align="center">
-  <h1>🏭 Blackbox Enterprises</h1>
-  <p><strong>Workflow automation. ETL. Enterprise integration. No-code.</strong></p>
-  <p>
-    <img src="https://img.shields.io/badge/n8n-Workflows-FF1D6C?style=for-the-badge"/>
-    <img src="https://img.shields.io/badge/Airbyte-ETL-9C27B0?style=for-the-badge"/>
-    <img src="https://img.shields.io/badge/Temporal-Durable%20Execution-2979FF?style=for-the-badge"/>
-  </p>
+
+# ⚙️ Blackbox Enterprises
+
+### Automate Everything.
+
+n8n, Airbyte, Prefect, Temporal — the full enterprise automation stack for teams that move fast.
+
+[![Platform](https://img.shields.io/badge/Platform-blackroad.io-FF1D6C?style=for-the-badge)](https://blackroad.io)
+[![Agents](https://img.shields.io/badge/AI_Agents-30%2C000-9C27B0?style=for-the-badge)](https://agents.blackroad.io)
+[![Cost](https://img.shields.io/badge/AI_Cost-%240-F5A623?style=for-the-badge)](https://blackroad.io)
+
 </div>
 
-## What Lives Here
+---
 
-Enterprise automation forks — workflow builders, data pipelines, and orchestration systems deployed under BlackRoad OS infrastructure.
+## 🎯 Focus Areas
 
-| Repo | Original | Purpose |
-|------|----------|---------|
-| `blackbox-n8n` | n8n | 400+ integrations, visual workflow builder |
-| `blackbox-airbyte` | Airbyte | 300+ ELT connectors |
-| `blackbox-activepieces` | Activepieces | No-code automation |
-| `blackbox-prefect` | Prefect | Python-native data orchestration |
-| `blackbox-temporal` | Temporal | Fault-tolerant distributed execution |
-| `blackbox-huginn` | Huginn | Agent-based automation |
+`Workflow Automation` • `ETL` • `Orchestration` • `No-Code`
+
+## 🔗 Links
+
+| | |
+|---|---|
+| 🌐 **Website** | [blackbox-enterprises.github.io](https://blackbox-enterprises.github.io) |
+| 📖 **Docs** | [docs.blackroad.io](https://docs.blackroad.io) |
+| 💬 **Status** | [status.blackroad.io](https://status.blackroad.io) |
+| 🤖 **Agents** | [agents.blackroad.io](https://agents.blackroad.io) |
 
 ---
+
+<div align="center">
+
+**Part of [BlackRoad OS](https://blackroad.io)** — 30,000 AI Agents • 17 Organizations • 1,800+ Repos • $0 AI Cost
+
 *© BlackRoad OS, Inc. All rights reserved.*
+
+</div>
