@@ -40,11 +40,26 @@ jobs:
             else if (text.match(/soon|important|needed/)) labels.push('priority:medium');
             else labels.push('priority:low');
 
+            const labelColors = {
+              'bug': 'd73a4a',
+              'enhancement': '0075ca',
+              'question': 'd876e3',
+              'documentation': '0075ca',
+              'security': 'e4e669',
+              'performance': 'f9d0c4',
+              'agents': '9C27B0',
+              'devops': '0e8a16',
+              'api': '1d76db',
+              'priority:high': 'ef4444',
+              'priority:medium': 'f9a825',
+              'priority:low': '0e8a16',
+            };
+
             for (const label of labels) {
               try {
                 await github.rest.issues.createLabel({
                   owner: context.repo.owner, repo: context.repo.repo,
-                  name: label, color: label === 'bug' ? 'd73a4a' : label.startsWith('priority:high') ? 'ef4444' : 'FF1D6C',
+                  name: label, color: labelColors[label] || 'ededed',
                 });
               } catch {}
             }
