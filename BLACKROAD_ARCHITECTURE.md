@@ -47,12 +47,12 @@ The system utilizes clusters of Raspberry Pi 5 nodes to host local Large Languag
 | Component | Technical Specification | Functional Role |
 |-----------|------------------------|-----------------|
 | Compute Node | Raspberry Pi 5 (8GB LPDDR4X) | General Purpose Inference and Control |
-| Inference Accelerator | Raspberry Pi AI Hat 2 (40 TOPS) | Dedicated INT8 LLM Processing |
+| Inference Accelerator | Hailo-based NPU (Hailo-8: 26 TOPS per node; optional Raspberry Pi AI Hat 2 / Hailo 10H: 40 TOPS) | Dedicated INT8 LLM Processing |
 | Network Layer | Gigabit Ethernet with PoE+ HAT | Synchronized Node Communication |
 | Storage | NVMe SSD (M.2 Interface, 256GB+) | Model Weights and Agent Memory |
 | Software Stack | LiteLLM Proxy / Ollama / llama.cpp | API Hosting and Load Balancing |
 
-The Raspberry Pi AI Hat 2, featuring the Hailo 10H NPU, allows for efficient processing of quantized GGUF models, achieving 5–15 tokens per second in clustered configurations using OpenMPI for parallelization.
+The cluster currently uses Hailo-8 accelerators (26 TOPS per node) on the lucidia and octavia Pi 5s. Nodes can optionally be upgraded to the Raspberry Pi AI Hat 2, featuring the Hailo 10H NPU (40 TOPS), which allows for efficient processing of quantized GGUF models, achieving 5–15 tokens per second in clustered configurations using OpenMPI for parallelization.
 
 ### Proxy Configuration for Copilot Offloading
 
