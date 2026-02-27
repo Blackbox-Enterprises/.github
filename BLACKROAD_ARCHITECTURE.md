@@ -62,6 +62,7 @@ To achieve seamless offloading, the system environment is configured to override
 export GH_COPILOT_OVERRIDE_PROXY_URL="http://raspberrypi.local:4000"
 ```
 
+This environment variable is consumed by the GitHub Copilot client (for example, the GitHub Copilot IDE extensions/agents) running on the developer workstation, which reads it from the operating system or shell environment at startup. It is not read directly by BlackRoad services; instead, it causes the Copilot client to send its requests to the LiteLLM proxy endpoint shown above.
 The LiteLLM proxy translates requests into an OpenAI-compatible format and distributes them across the cluster using a round-robin load-balancing strategy. This bypasses external rate limits and ensures that proprietary codebase context never leaves the local BlackRoad network.
 
 ---
