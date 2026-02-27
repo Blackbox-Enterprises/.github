@@ -25,25 +25,25 @@ When proposing features, think about **routing to existing tools** rather than b
 
 ## Organizations
 
-BlackRoad is organized into 15 specialized repositories:
+BlackRoad is organized into 15 specialized organizations. Tasks are distributed via the `@blackroad-agents` deca-layered scaffold (see [BLACKROAD_ARCHITECTURE.md](./BLACKROAD_ARCHITECTURE.md)):
 
-| Organization | Focus |
-|-------------|-------|
-| BlackRoad-OS | Core OS, operator, infrastructure |
-| BlackRoad-AI | AI models, routing, inference |
-| BlackRoad-Cloud | Cloud services, deployment |
-| BlackRoad-Labs | Research, experiments |
-| BlackRoad-Security | Security tools, auditing |
-| BlackRoad-Foundation | CRM, business tools |
-| BlackRoad-Media | Content, publishing |
-| BlackRoad-Hardware | IoT, ESP32, Pi projects |
-| BlackRoad-Education | Learning, documentation |
-| BlackRoad-Gov | Governance, voting |
-| BlackRoad-Interactive | Games, 3D, metaverse |
-| BlackRoad-Archive | Storage, backup |
-| BlackRoad-Studio | Design, creative tools |
-| BlackRoad-Ventures | Business, commerce |
-| Blackbox-Enterprises | Enterprise solutions |
+| Organization | Primary Responsibility |
+|-------------|----------------------|
+| Blackbox-Enterprises | Corporate and Enterprise Integrations |
+| BlackRoad-AI | Core LLM and Reasoning Engine Development |
+| BlackRoad-Archive | Long-term Data Persistence and Documentation |
+| BlackRoad-Cloud | Infrastructure as Code and Orchestration |
+| BlackRoad-Education | Onboarding and Documentation Frameworks |
+| BlackRoad-Foundation | Governance and Protocol Standards |
+| BlackRoad-Gov | Regulatory Compliance and Policy Enforcement |
+| BlackRoad-Hardware | SBC and IoT Device Management |
+| BlackRoad-Interactive | User Interface and Frontend Systems |
+| BlackRoad-Labs | Experimental R&D and Prototyping |
+| BlackRoad-Media | Content Delivery and Public Relations |
+| BlackRoad-OS | Core System Kernel and CLI Development |
+| BlackRoad-Security | Auditing, Cryptography, and Security |
+| BlackRoad-Studio | Production Assets and Creative Tooling |
+| BlackRoad-Ventures | Strategic Growth and Ecosystem Funding |
 
 Route your contribution to the appropriate organization.
 
