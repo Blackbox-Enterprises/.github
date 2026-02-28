@@ -1,7 +1,7 @@
 {
   "org": "Blackbox-Enterprises",
   "agent": "ALICE",
-  "color": "#44FF44",
+  "color": "#ffffff",
   "fleet": ["octavia-pi5","aria-pi4","cecilia","gematria-do","lucidia-pi5"],
   "runners": "blackroad-fleet",
   "cost": "$0",

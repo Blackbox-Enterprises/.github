@@ -1,6 +1,6 @@
 # Contributing to BlackRoad
 
-Thank you for your interest in contributing to BlackRoad! This document provides guidelines for contributing across all BlackRoad organizations.
+Thank you for your interest in contributing to BlackRoad. This document provides guidelines for contributing across all BlackRoad organizations.
 
 ## Core Philosophy
 
@@ -49,25 +49,23 @@ Route your contribution to the appropriate organization.
 
 ## Getting Started
 
-1. **Read the Architecture**: Review [BLACKROAD_ARCHITECTURE.md](./BLACKROAD_ARCHITECTURE.md) to understand the system design.
-
-2. **Find an Issue**: Look for issues labeled `good first issue` or `help wanted`.
-
-3. **Discuss First**: For significant changes, open an issue to discuss your approach before coding.
+1. **Read the Architecture** — Review [BLACKROAD_ARCHITECTURE.md](./BLACKROAD_ARCHITECTURE.md) to understand the system design.
+2. **Find an Issue** — Look for issues labeled `good first issue` or `help wanted`.
+3. **Discuss First** — For significant changes, open an issue to discuss your approach before coding.
 
 ## Development Process
 
 ### Branching Strategy
 
-- `main` - Stable, production-ready code
-- `develop` - Integration branch for features
-- `feature/*` - Feature branches
-- `fix/*` - Bug fix branches
-- `claude/*` - AI-assisted development branches
+```
+main      — Stable, production-ready code
+develop   — Integration branch for features
+feature/* — Feature branches
+fix/*     — Bug fix branches
+claude/*  — AI-assisted development branches
+```
 
 ### Commit Messages
-
-Use clear, descriptive commit messages:
 
 ```
 <type>: <short summary>
@@ -76,12 +74,15 @@ Use clear, descriptive commit messages:
 ```
 
 Types:
-- `feat` - New feature
-- `fix` - Bug fix
-- `docs` - Documentation
-- `refactor` - Code refactoring
-- `test` - Adding tests
-- `chore` - Maintenance tasks
+
+| Type | Purpose |
+|------|---------|
+| `feat` | New feature |
+| `fix` | Bug fix |
+| `docs` | Documentation |
+| `refactor` | Code refactoring |
+| `test` | Adding tests |
+| `chore` | Maintenance tasks |
 
 ### Pull Requests
 
@@ -95,25 +96,28 @@ Types:
 
 ### General Principles
 
-- **Route, don't build**: Leverage existing tools and APIs
-- **Keep it simple**: Minimal complexity, maximum clarity
-- **Document routing decisions**: Explain why requests go where they go
-- **Test routing paths**: Ensure requests reach the correct handlers
+- **Route, don't build** — Leverage existing tools and APIs
+- **Keep it simple** — Minimal complexity, maximum clarity
+- **Document routing decisions** — Explain why requests go where they go
+- **Test routing paths** — Ensure requests reach the correct handlers
 
 ### Node-Specific Guidelines
 
 When contributing code that runs on specific nodes:
 
-- **lucidia/octavia** (Pi 5 + Hailo-8): Consider 26 TOPS inference capability
-- **aria** (Pi 5): Keep agent orchestration lightweight
-- **alice** (Pi 400): Kubernetes-compatible, mesh-network aware
-- **shellfish** (Digital Ocean): Public-facing security considerations
+| Node | Hardware | Consideration |
+|------|----------|---------------|
+| lucidia / octavia | Pi 5 + Hailo-8 | Consider 26 TOPS inference capability |
+| aria | Pi 5 | Keep agent orchestration lightweight |
+| alice | Pi 400 | Kubernetes-compatible, mesh-network aware |
+| shellfish | Digital Ocean | Public-facing security considerations |
 
 ## Infrastructure
 
 ### Cost Awareness
 
 BlackRoad runs on ~$40/month infrastructure. Contributions should:
+
 - Not require expensive cloud resources
 - Work within Salesforce's 15K API calls/day free tier
 - Prefer edge computing over cloud when possible

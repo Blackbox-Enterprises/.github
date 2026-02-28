@@ -35,11 +35,12 @@
 ## Routing Impact
 
 <!-- If this changes routing logic, describe the routing pattern -->
-<!-- Example: [User Request] -> [Operator] -> [New Tool] -> [Answer] -->
+
+```
+[User Request] → [Operator] → [?] → [Answer]
+```
 
 ## Affected Nodes
-
-<!-- Check any nodes affected by this change -->
 
 - [ ] lucidia (Salesforce sync, RoadChain)
 - [ ] octavia (AI routing, 3D printing)
