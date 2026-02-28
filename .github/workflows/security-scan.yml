@@ -40,6 +40,16 @@ jobs:
             --exclude-dir=".git" --exclude-dir="node_modules" 2>/dev/null && FOUND=1
           grep -rn "ghp_[a-zA-Z0-9]" . \
             --exclude-dir=".git" 2>/dev/null && FOUND=1
+          # Stripe live keys
+          grep -rn "sk_live_[a-zA-Z0-9]" . --include="*.ts" --include="*.js" --include="*.py" --include="*.json" \
+            --exclude-dir=".git" --exclude-dir="node_modules" --exclude="*.example" --exclude="*.template" 2>/dev/null && FOUND=1
+          grep -rn "pk_live_[a-zA-Z0-9]" . --include="*.ts" --include="*.js" --include="*.py" --include="*.json" \
+            --exclude-dir=".git" --exclude-dir="node_modules" --exclude="*.example" --exclude="*.template" 2>/dev/null && FOUND=1
+          grep -rn "whsec_[a-zA-Z0-9]" . --include="*.ts" --include="*.js" --include="*.py" \
+            --exclude-dir=".git" --exclude-dir="node_modules" 2>/dev/null && FOUND=1
+          # Google service account keys
+          grep -rn '"private_key":\s*"-----BEGIN' . --include="*.json" \
+            --exclude-dir=".git" --exclude-dir="node_modules" 2>/dev/null && FOUND=1
           if [ $FOUND -eq 1 ]; then
             echo "::error::Potential hardcoded credentials detected!"
             exit 1
