@@ -1,0 +1,119 @@
+{
+  "title": "BlackRoad Directory",
+  "subtitle": "One control plane. Many nodes.",
+  "canonical_url": "https://directory.blackroad.systems",
+  "fallback_url": "https://blackbox-enterprises.github.io/.github/directory/",
+  "brand": {
+    "primary_color": "#0a0a0a",
+    "accent_color": "#44FF44",
+    "font": "JetBrains Mono, monospace"
+  },
+  "organizations": [
+    {
+      "name": "BlackRoad-OS",
+      "github": "BlackRoad-OS",
+      "role": "Core operating system, operator, infrastructure",
+      "icon": "cpu"
+    },
+    {
+      "name": "BlackRoad-AI",
+      "github": "BlackRoad-AI",
+      "role": "AI models, routing, inference",
+      "icon": "brain"
+    },
+    {
+      "name": "BlackRoad-Cloud",
+      "github": "BlackRoad-Cloud",
+      "role": "Cloud services, deployment",
+      "icon": "cloud"
+    },
+    {
+      "name": "BlackRoad-Labs",
+      "github": "BlackRoad-Labs",
+      "role": "Research, experiments",
+      "icon": "flask"
+    },
+    {
+      "name": "BlackRoad-Security",
+      "github": "BlackRoad-Security",
+      "role": "Security tools, auditing",
+      "icon": "shield"
+    },
+    {
+      "name": "BlackRoad-Foundation",
+      "github": "BlackRoad-Foundation",
+      "role": "CRM, business tools",
+      "icon": "building"
+    },
+    {
+      "name": "BlackRoad-Media",
+      "github": "BlackRoad-Media",
+      "role": "Content, publishing",
+      "icon": "film"
+    },
+    {
+      "name": "BlackRoad-Hardware",
+      "github": "BlackRoad-Hardware",
+      "role": "IoT, ESP32, Pi projects",
+      "icon": "circuit"
+    },
+    {
+      "name": "BlackRoad-Education",
+      "github": "BlackRoad-Education",
+      "role": "Learning, documentation",
+      "icon": "book"
+    },
+    {
+      "name": "BlackRoad-Gov",
+      "github": "BlackRoad-Gov",
+      "role": "Governance, voting",
+      "icon": "gavel"
+    },
+    {
+      "name": "BlackRoad-Interactive",
+      "github": "BlackRoad-Interactive",
+      "role": "Games, 3D, metaverse",
+      "icon": "gamepad"
+    },
+    {
+      "name": "BlackRoad-Archive",
+      "github": "BlackRoad-Archive",
+      "role": "Storage, backup",
+      "icon": "archive"
+    },
+    {
+      "name": "BlackRoad-Studio",
+      "github": "BlackRoad-Studio",
+      "role": "Design, creative tools",
+      "icon": "palette"
+    },
+    {
+      "name": "BlackRoad-Ventures",
+      "github": "BlackRoad-Ventures",
+      "role": "Business, commerce",
+      "icon": "trending-up"
+    },
+    {
+      "name": "Blackbox-Enterprises",
+      "github": "Blackbox-Enterprises",
+      "role": "Enterprise solutions, workflow automation",
+      "icon": "box"
+    }
+  ],
+  "fleet": {
+    "nodes": [
+      { "name": "lucidia", "hardware": "Pi 5 + Pironman + Hailo-8", "role": "Salesforce sync, RoadChain/Bitcoin" },
+      { "name": "octavia", "hardware": "Pi 5 + Pironman + Hailo-8", "role": "AI routing (26 TOPS), 3D printing" },
+      { "name": "aria", "hardware": "Pi 5", "role": "Agent orchestration, Cloudflare Workers" },
+      { "name": "alice", "hardware": "Pi 400", "role": "Kubernetes + VPN hub (mesh root)" },
+      { "name": "shellfish", "hardware": "Digital Ocean", "role": "Public-facing gateway" }
+    ]
+  },
+  "links": {
+    "website": "https://blackroad.io",
+    "docs": "https://docs.blackroad.io",
+    "status": "https://status.blackroad.io",
+    "agents": "https://agents.blackroad.io",
+    "security": "mailto:security@blackroad.io"
+  }
+}

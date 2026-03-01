@@ -22,6 +22,7 @@ n8n, Airbyte, Prefect, Temporal — the full enterprise automation stack for tea
 
 | | |
 |---|---|
+| 🗂️ **Directory** | [directory.blackroad.systems](https://directory.blackroad.systems) |
 | 🌐 **Website** | [blackbox-enterprises.github.io](https://blackbox-enterprises.github.io) |
 | 📖 **Docs** | [docs.blackroad.io](https://docs.blackroad.io) |
 | 💬 **Status** | [status.blackroad.io](https://status.blackroad.io) |
