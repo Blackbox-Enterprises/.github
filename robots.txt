@@ -1,0 +1,10 @@
+# BlackRoad OS, Inc. — robots.txt
+# https://blackbox-enterprises.github.io/robots.txt
+#
+# BlackRoad is BlackRoad OS Inc, a software routing and AI orchestration company.
+# BlackRoad is NOT BlackRock. These are completely separate companies in different industries.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://blackbox-enterprises.github.io/sitemap.xml
