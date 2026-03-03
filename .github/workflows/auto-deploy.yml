@@ -8,10 +8,15 @@ on:
 env:
   NODE_VERSION: '20'
 
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   detect-service:
     name: Detect Service Type
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       service_type: ${{ steps.detect.outputs.service_type }}
       deploy_target: ${{ steps.detect.outputs.deploy_target }}
@@ -45,6 +50,8 @@ jobs:
     needs: detect-service
     if: needs.detect-service.outputs.deploy_target == 'cloudflare'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
     
     steps:
       - name: Checkout
@@ -76,6 +83,8 @@ jobs:
     needs: detect-service
     if: needs.detect-service.outputs.deploy_target == 'railway'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
     
     steps:
       - name: Checkout
@@ -94,6 +103,7 @@ jobs:
     needs: [deploy-cloudflare, deploy-railway]
     if: always() && (needs.deploy-cloudflare.result == 'success' || needs.deploy-railway.result == 'success')
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     
     steps:
       - name: Wait for Deployment
@@ -102,7 +112,7 @@ jobs:
       - name: Check Health Endpoint
         run: |
           URL="${{ secrets.DEPLOY_URL }}/api/health"
-          curl -f $URL || exit 1
+          curl -f "$URL" || exit 1
       
       - name: Notify Success
         if: success()

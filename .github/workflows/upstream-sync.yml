@@ -8,6 +8,7 @@ jobs:
   sync:
     name: Sync from upstream forks
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       matrix:
         repo: [blackbox-n8n, blackbox-prefect, blackbox-temporal, blackbox-activepieces]

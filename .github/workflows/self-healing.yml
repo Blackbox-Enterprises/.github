@@ -12,6 +12,7 @@ jobs:
   monitor:
     name: Monitor Deployments
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     
     steps:
       - name: Checkout
@@ -21,7 +22,7 @@ jobs:
         id: health
         run: |
           if [ ! -z "${{ secrets.DEPLOY_URL }}" ]; then
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${{ secrets.DEPLOY_URL }}/api/health || echo "000")
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.DEPLOY_URL }}/api/health" || echo "000")
             echo "status=$STATUS" >> $GITHUB_OUTPUT
           else
             echo "status=skip" >> $GITHUB_OUTPUT
@@ -62,6 +63,7 @@ jobs:
   dependency-updates:
     name: Auto Update Dependencies
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     
     steps:
       - name: Checkout

@@ -16,12 +16,13 @@ jobs:
   secret-scan:
     name: Secret Detection
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with: { fetch-depth: 0 }
 
       - name: Scan for secrets (trufflehog)
-        uses: trufflesecurity/trufflehog@main
+        uses: trufflesecurity/trufflehog@041f07e9df901a1038a528e5525b0226d04dd5ea # v3.93.6
         with:
           path: ./
           base: ${{ github.event.repository.default_branch }}
@@ -49,6 +50,7 @@ jobs:
   dependency-audit:
     name: Dependency Audit
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
@@ -68,16 +70,17 @@ jobs:
   codeql:
     name: CodeQL Analysis
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
       matrix:
         language: ['javascript', 'python']
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - uses: github/codeql-action/init@v3
+      - uses: github/codeql-action/init@8214744c546c1e5c8f03dde8fab3a7353211988d # v3.26.7
         with:
           languages: ${{ matrix.language }}
         continue-on-error: true
-      - uses: github/codeql-action/autobuild@v3
+      - uses: github/codeql-action/autobuild@8214744c546c1e5c8f03dde8fab3a7353211988d # v3.26.7
         continue-on-error: true
-      - uses: github/codeql-action/analyze@v3
+      - uses: github/codeql-action/analyze@8214744c546c1e5c8f03dde8fab3a7353211988d # v3.26.7
         continue-on-error: true

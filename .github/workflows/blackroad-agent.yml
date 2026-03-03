@@ -9,6 +9,7 @@ jobs:
   agent-identity:
     name: Load Agent Identity
     runs-on: [self-hosted, pi]
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Identify branch agent
