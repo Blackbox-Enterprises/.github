@@ -36,8 +36,8 @@ jobs:
           FOUND=0
           grep -rn "sk-[a-zA-Z0-9]" . --include="*.ts" --include="*.js" --include="*.py" \
             --exclude-dir=".git" --exclude-dir="node_modules" 2>/dev/null && FOUND=1
-          grep -rn "ANTHROPIC_API_KEY\s*=\s*['\"]sk" . \
-            --exclude-dir=".git" --exclude-dir="node_modules" 2>/dev/null && FOUND=1
+          grep -rn "API_KEY\s*=\s*['\"]" . \
+            --exclude-dir=".git" --exclude-dir="node_modules" --exclude-dir=".env.example" 2>/dev/null && FOUND=1
           grep -rn "ghp_[a-zA-Z0-9]" . \
             --exclude-dir=".git" 2>/dev/null && FOUND=1
           if [ $FOUND -eq 1 ]; then

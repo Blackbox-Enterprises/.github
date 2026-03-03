@@ -16,7 +16,7 @@ body:
       options:
         - Operator/Routing
         - Salesforce Integration
-        - AI/LLM Integration
+        - Local Inference (Hailo-8)
         - Cloudflare/Edge
         - Hardware (Pi Cluster)
         - Mesh Network (Tailscale)

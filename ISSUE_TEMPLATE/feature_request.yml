@@ -67,8 +67,9 @@ body:
       label: Proposed Solution
       description: Describe the solution you'd like. Remember - we route to existing tools, we don't build from scratch.
       placeholder: |
-        Example: Route physics calculations to NumPy/SciPy instead of LLMs
+        Example: Route physics calculations to NumPy/SciPy on the Pi fleet
         Example: Add Salesforce API endpoint for customer lookups
+        Example: Deploy a new local model to octavia's Hailo-8
     validations:
       required: true
 

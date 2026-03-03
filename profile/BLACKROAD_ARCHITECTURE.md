@@ -6,9 +6,9 @@
 
 ## Executive Summary
 
-We don't train models or buy GPUs. We connect users to intelligence that already exists (Claude, GPT, Llama, NumPy, legal databases, etc.) through an orchestration layer we own.
+We don't train models or buy GPUs. We route requests to the right tool through an orchestration layer running on hardware we own — a Raspberry Pi cluster with Hailo-8 accelerators for local inference, plus NumPy, legal databases, and domain-specific APIs.
 
-**The insight:** Intelligence is already trained. Libraries already exist. The value is in routing requests to the right tool at the right time—not in building another brain.
+**The insight:** The value is in routing requests to the right tool at the right time — not in paying providers or building another brain. All inference runs locally on our Pi fleet.
 
 ---
 
@@ -78,13 +78,13 @@ Plus dev machines (Mac = "cecilia", iPhone = "arcadia") and edge devices (ESP32s
 [User Request] → [Operator] → [Route to Right Tool] → [Answer]
                      │
                      ├── Physics question? → NumPy/SciPy
-                     ├── Language task? → Claude/GPT API
+                     ├── Language task? → Hailo-8 local inference (octavia/lucidia)
                      ├── Customer lookup? → Salesforce API
                      ├── Legal question? → Legal database
-                     └── Fast inference? → Hailo-8 local
+                     └── Agent task? → Pi fleet (aria orchestration)
 ```
 
-The agent doesn't need to be smart. It needs to know **who to call.**
+The agent doesn't need to be smart. It needs to know **who to call.** All inference stays on our hardware.
 
 ---
 
@@ -97,7 +97,7 @@ The agent doesn't need to be smart. It needs to know **who to call.**
 | Data and state | Data centers |
 | The Operator | The intelligence itself |
 
-When better models come out, we add them to the router. Infrastructure stays the same.
+When better local models come out, we deploy them to the Pi fleet. No provider dependencies. Infrastructure stays the same.
 
 ---
 
@@ -153,9 +153,9 @@ This is the Operator pattern in miniature. Start with physics, extend to every d
 
 - **Source of Truth:** GitHub (BlackRoad-OS) + Cloudflare
 - **Hash Verification:** PS-SHA-∞ (infinite cascade hashing)
-- **Authorization:** Alexa's pattern via Claude/ChatGPT
+- **Authorization:** Alexa's pattern via BlackRoad Operator
 
 ---
 
-*Last Updated: 2026-01-12*
+*Last Updated: 2026-03-03*
 *BlackRoad OS, Inc. - Proprietary and Confidential*

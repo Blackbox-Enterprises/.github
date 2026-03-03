@@ -15,10 +15,10 @@ We don't build models or own GPUs. We orchestrate existing intelligence through 
 ```
 [User Request] → [Operator] → [Route to Right Tool] → [Answer]
                      ├── Physics question? → NumPy/SciPy
-                     ├── Language task? → Claude/GPT API
+                     ├── Language task? → Hailo-8 local inference (octavia/lucidia)
                      ├── Customer lookup? → Salesforce API
                      ├── Legal question? → Legal database
-                     └── Fast inference? → Hailo-8 local
+                     └── Agent task? → Pi fleet (aria orchestration)
 ```
 
 When proposing features, think about **routing to existing tools** rather than building from scratch.
@@ -63,7 +63,6 @@ Route your contribution to the appropriate organization.
 - `develop` - Integration branch for features
 - `feature/*` - Feature branches
 - `fix/*` - Bug fix branches
-- `claude/*` - AI-assisted development branches
 
 ### Commit Messages
 
@@ -136,4 +135,4 @@ All nodes communicate via Tailscale. Consider network topology when designing fe
 
 ---
 
-*Intelligence is already trained. Libraries already exist. We just route to the right ones.*
+*We route to the right tool, on hardware we own. No providers. No dependencies.*
