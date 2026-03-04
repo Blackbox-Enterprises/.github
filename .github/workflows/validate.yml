@@ -1,0 +1,135 @@
+name: ✅ Validate Config
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - '.github/**'
+      - 'ISSUE_TEMPLATE/**'
+      - 'agent.json'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - '.github/**'
+      - 'ISSUE_TEMPLATE/**'
+      - 'agent.json'
+  workflow_dispatch:
+
+jobs:
+  validate-workflows:
+    name: Validate Workflows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Validate YAML syntax
+        run: |
+          echo "🔍 Validating workflow YAML files..."
+          ERRORS=0
+          for f in .github/workflows/*.yml; do
+            if [ -f "$f" ]; then
+              python3 -c "import yaml; yaml.safe_load(open('$f'))" 2>/dev/null
+              if [ $? -eq 0 ]; then
+                echo "  ✅ $f"
+              else
+                echo "  ❌ $f — invalid YAML"
+                ERRORS=$((ERRORS + 1))
+              fi
+            fi
+          done
+          if [ $ERRORS -gt 0 ]; then
+            echo "::error::$ERRORS workflow files have invalid YAML"
+            exit 1
+          fi
+          echo "✅ All workflow files are valid YAML"
+
+      - name: Validate issue templates
+        run: |
+          echo "🔍 Validating issue templates..."
+          ERRORS=0
+          for f in ISSUE_TEMPLATE/*.yml; do
+            if [ -f "$f" ]; then
+              python3 -c "import yaml; yaml.safe_load(open('$f'))" 2>/dev/null
+              if [ $? -eq 0 ]; then
+                echo "  ✅ $f"
+              else
+                echo "  ❌ $f — invalid YAML"
+                ERRORS=$((ERRORS + 1))
+              fi
+            fi
+          done
+          if [ $ERRORS -gt 0 ]; then
+            echo "::error::$ERRORS issue template files have invalid YAML"
+            exit 1
+          fi
+          echo "✅ All issue templates are valid"
+
+      - name: Validate agent.json
+        run: |
+          echo "🔍 Validating agent.json..."
+          if [ -f "agent.json" ]; then
+            python3 -c "
+          import json, sys
+          try:
+            cfg = json.load(open('agent.json'))
+            required = ['org', 'agent']
+            missing = [k for k in required if k not in cfg]
+            if missing:
+              print(f'❌ Missing required fields: {missing}')
+              sys.exit(1)
+            print(f'✅ agent.json valid — Agent: {cfg[\"agent\"]}, Org: {cfg[\"org\"]}')
+          except json.JSONDecodeError as e:
+            print(f'❌ Invalid JSON: {e}')
+            sys.exit(1)
+          "
+          else
+            echo "ℹ️ No agent.json found"
+          fi
+
+      - name: Validate dependabot config
+        run: |
+          echo "🔍 Validating dependabot.yml..."
+          if [ -f ".github/dependabot.yml" ]; then
+            python3 -c "
+          import yaml, sys
+          try:
+            cfg = yaml.safe_load(open('.github/dependabot.yml'))
+            if 'version' not in cfg:
+              print('❌ Missing version field')
+              sys.exit(1)
+            if 'updates' not in cfg:
+              print('❌ Missing updates field')
+              sys.exit(1)
+            print(f'✅ dependabot.yml valid — {len(cfg[\"updates\"])} update configs')
+          except yaml.YAMLError as e:
+            print(f'❌ Invalid YAML: {e}')
+            sys.exit(1)
+          "
+          else
+            echo "ℹ️ No dependabot.yml found"
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## ✅ Config Validation Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| File | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+
+          for f in .github/workflows/*.yml; do
+            NAME=$(basename "$f")
+            if python3 -c "import yaml; yaml.safe_load(open('$f'))" 2>/dev/null; then
+              echo "| \`$NAME\` | ✅ Valid |" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "| \`$NAME\` | ❌ Invalid |" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+
+          if [ -f "agent.json" ]; then
+            if python3 -c "import json; json.load(open('agent.json'))" 2>/dev/null; then
+              echo "| \`agent.json\` | ✅ Valid |" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "| \`agent.json\` | ❌ Invalid |" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi

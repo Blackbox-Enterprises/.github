@@ -21,7 +21,7 @@ jobs:
         with: { fetch-depth: 0 }
 
       - name: Scan for secrets (trufflehog)
-        uses: trufflesecurity/trufflehog@main
+        uses: trufflesecurity/trufflehog@041f07e9df901a1038a528e5525b0226d04dd5ea # v3.93.6
         with:
           path: ./
           base: ${{ github.event.repository.default_branch }}
@@ -32,7 +32,6 @@ jobs:
       - name: Check for hardcoded tokens
         run: |
           echo "Scanning for hardcoded credentials..."
-          # Check for common patterns
           FOUND=0
           grep -rn "sk-[a-zA-Z0-9]" . --include="*.ts" --include="*.js" --include="*.py" \
             --exclude-dir=".git" --exclude-dir="node_modules" 2>/dev/null && FOUND=1
@@ -69,15 +68,16 @@ jobs:
     name: CodeQL Analysis
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         language: ['javascript', 'python']
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - uses: github/codeql-action/init@v3
+      - uses: github/codeql-action/init@ae9ef3a1d2e3413523c3741725c30064970cc0d4 # v3
         with:
           languages: ${{ matrix.language }}
         continue-on-error: true
-      - uses: github/codeql-action/autobuild@v3
+      - uses: github/codeql-action/autobuild@ae9ef3a1d2e3413523c3741725c30064970cc0d4 # v3
         continue-on-error: true
-      - uses: github/codeql-action/analyze@v3
+      - uses: github/codeql-action/analyze@ae9ef3a1d2e3413523c3741725c30064970cc0d4 # v3
         continue-on-error: true

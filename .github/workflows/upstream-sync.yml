@@ -4,28 +4,86 @@ on:
     - cron: '0 2 * * 0'  # Weekly Sunday 2 AM
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   sync:
-    name: Sync from upstream forks
+    name: Sync from upstream — ${{ matrix.repo.name }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        repo: [blackbox-n8n, blackbox-prefect, blackbox-temporal, blackbox-activepieces]
+        repo:
+          - { name: blackbox-n8n, upstream: n8n-io/n8n }
+          - { name: blackbox-prefect, upstream: PrefectHQ/prefect }
+          - { name: blackbox-temporal, upstream: temporalio/temporal }
+          - { name: blackbox-activepieces, upstream: activepieces/activepieces }
     steps:
-      - name: Checkout ${{ matrix.repo }}
+      - name: Checkout ${{ matrix.repo.name }}
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          repository: Blackbox-Enterprises/${{ matrix.repo }}
+          repository: Blackbox-Enterprises/${{ matrix.repo.name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Check upstream for updates
+      - name: Add upstream remote
         run: |
-          echo "Checking ${{ matrix.repo }} for upstream changes..."
-          git log --oneline -5
-          echo "✅ Checked ${{ matrix.repo }}"
+          git remote add upstream https://github.com/${{ matrix.repo.upstream }}.git 2>/dev/null || true
+          git fetch upstream --quiet
+
+      - name: Check for new upstream commits
+        id: check
+        run: |
+          UPSTREAM_BRANCH=$(git remote show upstream | grep 'HEAD branch' | awk '{print $NF}')
+          LOCAL_HEAD=$(git rev-parse HEAD)
+          UPSTREAM_HEAD=$(git rev-parse upstream/${UPSTREAM_BRANCH} 2>/dev/null || echo "none")
+
+          if [ "$UPSTREAM_HEAD" = "none" ]; then
+            echo "⚠️ Could not resolve upstream HEAD"
+            echo "has_updates=false" >> $GITHUB_OUTPUT
+          elif [ "$LOCAL_HEAD" = "$UPSTREAM_HEAD" ]; then
+            echo "✅ ${{ matrix.repo.name }} is up to date"
+            echo "has_updates=false" >> $GITHUB_OUTPUT
+          else
+            BEHIND=$(git rev-list --count HEAD..upstream/${UPSTREAM_BRANCH})
+            echo "📦 ${{ matrix.repo.name }} is $BEHIND commits behind upstream"
+            echo "has_updates=true" >> $GITHUB_OUTPUT
+            echo "upstream_branch=${UPSTREAM_BRANCH}" >> $GITHUB_OUTPUT
+            echo "behind_count=${BEHIND}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create sync branch and PR
+        if: steps.check.outputs.has_updates == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          SYNC_BRANCH="upstream-sync/$(date +%Y-%m-%d)"
+          git config user.name "BlackRoad Sync Bot"
+          git config user.email "bot@blackroad.io"
+
+          git checkout -b "$SYNC_BRANCH"
+          git merge upstream/${{ steps.check.outputs.upstream_branch }} --no-edit || {
+            echo "⚠️ Merge conflict detected, aborting"
+            git merge --abort
+            echo "Manual merge required for ${{ matrix.repo.name }}"
+            exit 0
+          }
+
+          git push origin "$SYNC_BRANCH"
+
+          gh pr create \
+            --repo "Blackbox-Enterprises/${{ matrix.repo.name }}" \
+            --title "⬆️ Upstream sync: ${{ steps.check.outputs.behind_count }} commits from ${{ matrix.repo.upstream }}" \
+            --body "Automated upstream sync from \`${{ matrix.repo.upstream }}\`.\n\n- **Commits behind:** ${{ steps.check.outputs.behind_count }}\n- **Upstream branch:** ${{ steps.check.outputs.upstream_branch }}\n- **Synced at:** $(date -u)\n\n_BlackRoad Sync Bot_ 🤖" \
+            --head "$SYNC_BRANCH" \
+            --label "upstream-sync,automated" || echo "PR already exists or creation failed"
 
       - name: Report status
+        if: always()
         run: |
-          echo "## Upstream Sync: ${{ matrix.repo }}" >> $GITHUB_STEP_SUMMARY
+          echo "## Upstream Sync: ${{ matrix.repo.name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Upstream: ${{ matrix.repo.upstream }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Has updates: ${{ steps.check.outputs.has_updates || 'unknown' }}" >> $GITHUB_STEP_SUMMARY
           echo "- Checked at: $(date -u)" >> $GITHUB_STEP_SUMMARY

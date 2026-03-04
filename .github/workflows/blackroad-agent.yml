@@ -8,17 +8,52 @@ on:
 jobs:
   agent-identity:
     name: Load Agent Identity
-    runs-on: [self-hosted, pi]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Load agent config
+        id: agent
+        run: |
+          if [ -f "agent.json" ]; then
+            AGENT=$(python3 -c "import json; print(json.load(open('agent.json')).get('agent','BLACKROAD'))")
+            ORG=$(python3 -c "import json; print(json.load(open('agent.json')).get('org','unknown'))")
+            echo "name=${AGENT}" >> $GITHUB_OUTPUT
+            echo "org=${ORG}" >> $GITHUB_OUTPUT
+          else
+            echo "name=BLACKROAD" >> $GITHUB_OUTPUT
+            echo "org=${{ github.repository_owner }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Identify branch agent
+        env:
+          AGENT_NAME: ${{ steps.agent.outputs.name }}
         run: |
           BRANCH="${GITHUB_REF_NAME}"
-          curl -sf "https://raw.githubusercontent.com/BlackRoad-OS-Inc/blackroad/master/.agents/${BRANCH}.json" \
-            -o .agent-identity.json 2>/dev/null || \
-          echo "{\"agent\":\"BLACKROAD\",\"branch\":\"${BRANCH}\",\"role\":\"orchestrator\"}" > .agent-identity.json
-          AGENT=$(python3 -c "import json; print(json.load(open('.agent-identity.json')).get('agent','BLACKROAD'))")
-          echo "🤖 Agent: ${AGENT} | Org: ${{ github.repository_owner }} | Branch: ${BRANCH}"
-          echo "AGENT_NAME=${AGENT}" >> $GITHUB_ENV
+          echo "🤖 Agent: ${AGENT_NAME} | Org: ${{ steps.agent.outputs.org }} | Branch: ${BRANCH}"
+
+      - name: Validate agent config
+        run: |
+          if [ -f "agent.json" ]; then
+            python3 -c "
+          import json, sys
+          cfg = json.load(open('agent.json'))
+          required = ['org', 'agent']
+          missing = [k for k in required if k not in cfg]
+          if missing:
+            print(f'⚠️ Missing required fields: {missing}')
+            sys.exit(1)
+          print(f'✅ Agent config valid: {cfg[\"agent\"]} @ {cfg[\"org\"]}')
+          if 'fleet' in cfg:
+            print(f'   Fleet: {len(cfg[\"fleet\"])} nodes')
+          if 'gateway' in cfg:
+            print(f'   Gateway: {cfg[\"gateway\"]}')
+          "
+          else
+            echo "ℹ️ No agent.json found"
+          fi
+
       - name: Health ping
+        env:
+          AGENT_NAME: ${{ steps.agent.outputs.name }}
         run: echo "✅ ${AGENT_NAME} active in ${{ github.repository }}"

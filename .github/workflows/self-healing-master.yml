@@ -2,7 +2,7 @@ name: 🤖 Self-Healing Master
 
 on:
   workflow_run:
-    workflows: ["*"]
+    workflows: ["🚀 Auto Deploy", "🔒 Security Scan"]
     types: [completed]
   schedule:
     - cron: '*/10 * * * *'
@@ -40,9 +40,14 @@ jobs:
         run: |
           echo "🔍 Analyzing system health..."
           if [ "${{ github.event.workflow_run.conclusion }}" == "failure" ]; then
+            WORKFLOW_NAME="${{ github.event.workflow_run.name }}"
             echo "fix_type=workflow_failure" >> $GITHUB_OUTPUT
             echo "needs_healing=true" >> $GITHUB_OUTPUT
-            echo "reason=Workflow execution failed" >> $GITHUB_OUTPUT
+            echo "reason=Workflow '${WORKFLOW_NAME}' failed" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.force_heal }}" == "true" ]; then
+            echo "fix_type=forced" >> $GITHUB_OUTPUT
+            echo "needs_healing=true" >> $GITHUB_OUTPUT
+            echo "reason=Force heal requested" >> $GITHUB_OUTPUT
           else
             echo "needs_healing=false" >> $GITHUB_OUTPUT
           fi
@@ -57,16 +62,81 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: ⚙️ Setup Node.js
+        if: hashFiles('package.json') != ''
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
+        with:
+          node-version: '20'
+
+      - name: 🔧 Attempt Auto-Heal
+        id: heal
+        run: |
+          echo "🔧 Auto-healing for: ${{ needs.analyze-failure.outputs.failure_reason }}"
+
+          HEALED=false
+
+          # Fix dependency issues
+          if [ -f "package.json" ]; then
+            echo "📦 Checking dependencies..."
+            rm -rf node_modules .next dist build .cache
+
+            if [ -f "pnpm-lock.yaml" ]; then
+              npm install -g pnpm
+              pnpm install && HEALED=true
+            elif [ -f "package-lock.json" ]; then
+              npm ci && HEALED=true
+            else
+              npm install && HEALED=true
+            fi
+
+            # Attempt build
+            if grep -q '"build"' package.json 2>/dev/null; then
+              npm run build || echo "Build still failing after dep fix"
+            fi
+          fi
+
+          # Fix YAML syntax issues
+          for f in .github/workflows/*.yml; do
+            if [ -f "$f" ]; then
+              python3 -c "import yaml; yaml.safe_load(open('$f'))" 2>/dev/null || echo "⚠️ Invalid YAML: $f"
+            fi
+          done
+
+          echo "healed=$HEALED" >> $GITHUB_OUTPUT
+
+      - name: 📝 Commit Fixes
+        if: steps.heal.outputs.healed == 'true'
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "BlackRoad Auto-Heal Bot"
+            git config user.email "bot@blackroad.io"
+            git add -A
+            git commit -m "🔧 Auto-heal: ${{ needs.analyze-failure.outputs.failure_reason }}"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
       - name: ❌ Create Issue on Failure
         if: failure()
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'auto-fix-failed',
+              state: 'open',
+            });
+            if (existing.data.length > 0) {
+              console.log('Open auto-fix-failed issue already exists, skipping.');
+              return;
+            }
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: '🚨 Self-Healing Failed',
-              body: 'Auto-healing attempt failed. Manual intervention required.',
+              body: `Auto-healing attempt failed.\n\n**Reason:** ${{ needs.analyze-failure.outputs.failure_reason }}\n**Workflow Run:** ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
               labels: ['auto-fix-failed', 'urgent']
             });
 
@@ -75,9 +145,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🏥 Check Service Health
+        id: health
         run: |
           echo "🏥 Health check: $(date)"
-          curl -sf https://api.blackroad.io/health 2>/dev/null && echo "✅ API healthy" || echo "⚠️  API unreachable"
+          if [ ! -z "${{ secrets.DEPLOY_URL }}" ]; then
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.DEPLOY_URL }}/api/health" --max-time 10 || echo "000")
+            echo "status=$STATUS" >> $GITHUB_OUTPUT
+            if [ "$STATUS" = "200" ]; then
+              echo "✅ Service healthy (HTTP $STATUS)"
+            else
+              echo "⚠️ Service unhealthy (HTTP $STATUS)"
+            fi
+          else
+            echo "ℹ️ No DEPLOY_URL configured, skipping health check"
+            echo "status=skip" >> $GITHUB_OUTPUT
+          fi
 
   dependency-audit:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
@@ -87,7 +169,8 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: ⚙️ Setup Node.js
-        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
+        if: hashFiles('package.json') != ''
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4
         with:
           node-version: '20'
 
