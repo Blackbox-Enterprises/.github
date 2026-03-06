@@ -292,10 +292,14 @@
 
       try {
         const res = await fetch(CONFIG_URL);
+        if (!res.ok) {
+          throw new Error(`Failed to load ${CONFIG_URL}: ${res.status} ${res.statusText}`);
+        }
         config = await res.json();
-      } catch {
+      } catch (err) {
+        const message = err instanceof Error ? err.message : 'Failed to load config.json';
         document.getElementById('org-grid').innerHTML =
-          '<div class="error-note">Failed to load config.json</div>';
+          `<div class="error-note">${message}</div>`;
         return;
       }
 
