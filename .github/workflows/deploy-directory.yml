@@ -7,7 +7,7 @@ on:
       - 'directory/**'
   workflow_dispatch:
   schedule:
-    # Rebuild weekly to keep cached API data fresh in any static snapshots
+    # Rebuild weekly to ensure the directory site is periodically redeployed and validated
     - cron: '0 6 * * 1'
 
 permissions:
