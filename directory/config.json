@@ -2,7 +2,7 @@
   "title": "BlackRoad Directory",
   "subtitle": "One control plane. Many nodes.",
   "canonical_url": "https://directory.blackroad.systems",
-  "fallback_url": "https://blackbox-enterprises.github.io/.github/directory/",
+  "fallback_url": "https://blackbox-enterprises.github.io/.github/",
   "brand": {
     "primary_color": "#0a0a0a",
     "accent_color": "#44FF44",
