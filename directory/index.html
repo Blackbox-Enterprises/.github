@@ -324,10 +324,21 @@
       config.fleet.nodes.forEach(node => {
         const el = document.createElement('div');
         el.className = 'fleet-node';
-        el.innerHTML = `
-          <div class="node-name">${node.name}</div>
-          <div class="node-hw">${node.hardware}</div>
-          <div class="node-role">${node.role}</div>`;
+
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'node-name';
+        nameDiv.textContent = node.name;
+        el.appendChild(nameDiv);
+
+        const hwDiv = document.createElement('div');
+        hwDiv.className = 'node-hw';
+        hwDiv.textContent = node.hardware;
+        el.appendChild(hwDiv);
+
+        const roleDiv = document.createElement('div');
+        roleDiv.className = 'node-role';
+        roleDiv.textContent = node.role;
+        el.appendChild(roleDiv);
         fleetGrid.appendChild(el);
       });
 
