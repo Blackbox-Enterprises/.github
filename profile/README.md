@@ -1,38 +1,36 @@
 <div align="center">
 
-# ⚙️ Blackbox Enterprises
+# Blackbox Enterprises
 
-### Automate Everything.
+**Enterprise automation — n8n, Airbyte, Prefect, Temporal, Huginn, Activepieces.**
 
-n8n, Airbyte, Prefect, Temporal — the full enterprise automation stack for teams that move fast.
-
-[![Platform](https://img.shields.io/badge/Platform-blackroad.io-FF1D6C?style=for-the-badge)](https://blackroad.io)
-[![Agents](https://img.shields.io/badge/AI_Agents-30%2C000-9C27B0?style=for-the-badge)](https://agents.blackroad.io)
-[![Cost](https://img.shields.io/badge/AI_Cost-%240-F5A623?style=for-the-badge)](https://blackroad.io)
+[![Website](https://img.shields.io/badge/blackbox--enterprises.github.io-000?style=flat-square&logo=github)](https://blackbox-enterprises.github.io)
 
 </div>
 
 ---
 
-## 🎯 Focus Areas
+## Repositories
 
-`Workflow Automation` • `ETL` • `Orchestration` • `No-Code`
-
-## 🔗 Links
-
-| | |
+| Repository | Description |
 |---|---|
-| 🌐 **Website** | [blackbox-enterprises.github.io](https://blackbox-enterprises.github.io) |
-| 📖 **Docs** | [docs.blackroad.io](https://docs.blackroad.io) |
-| 💬 **Status** | [status.blackroad.io](https://status.blackroad.io) |
-| 🤖 **Agents** | [agents.blackroad.io](https://agents.blackroad.io) |
+| [blackbox-enterprises.github.io](https://github.com/Blackbox-Enterprises/blackbox-enterprises.github.io) | BlackRoad OS GitHub Pages |
+| [blackbox-prefect](https://github.com/Blackbox-Enterprises/blackbox-prefect) | BlackRoad enterprise fork: blackbox-prefect |
+| [blackbox-activepieces](https://github.com/Blackbox-Enterprises/blackbox-activepieces) | BlackRoad enterprise fork: blackbox-activepieces |
+| [blackbox-huginn](https://github.com/Blackbox-Enterprises/blackbox-huginn) | BlackRoad enterprise fork: blackbox-huginn |
+| [blackbox-airbyte](https://github.com/Blackbox-Enterprises/blackbox-airbyte) | BlackRoad enterprise fork: blackbox-airbyte |
+| [blackbox-temporal](https://github.com/Blackbox-Enterprises/blackbox-temporal) | BlackRoad enterprise fork: blackbox-temporal |
+| [blackbox-n8n](https://github.com/Blackbox-Enterprises/blackbox-n8n) | BlackRoad enterprise fork: blackbox-n8n |
+
+<details>
+<summary>Archived</summary>
+
+| Repository | Description |
+|---|---|
+
+
+</details>
 
 ---
 
-<div align="center">
-
-**Part of [BlackRoad OS](https://blackroad.io)** — 30,000 AI Agents • 17 Organizations • 1,800+ Repos • $0 AI Cost
-
-*© BlackRoad OS, Inc. All rights reserved.*
-
-</div>
+<sub>BlackRoad OS, Inc. — [blackroad.io](https://blackroad.io)</sub>
