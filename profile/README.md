@@ -1,36 +1,25 @@
-<div align="center">
-
 # Blackbox Enterprises
 
-**Enterprise automation — n8n, Airbyte, Prefect, Temporal, Huginn, Activepieces.**
-
-[![Website](https://img.shields.io/badge/blackbox--enterprises.github.io-000?style=flat-square&logo=github)](https://blackbox-enterprises.github.io)
-
-</div>
+**A division of [BlackRoad OS, Inc.](https://github.com/BlackRoad-OS-Inc) — Proprietary Software**
 
 ---
 
-## Repositories
+## About
 
-| Repository | Description |
-|---|---|
-| [blackbox-enterprises.github.io](https://github.com/Blackbox-Enterprises/blackbox-enterprises.github.io) | BlackRoad OS GitHub Pages |
-| [blackbox-prefect](https://github.com/Blackbox-Enterprises/blackbox-prefect) | BlackRoad enterprise fork: blackbox-prefect |
-| [blackbox-activepieces](https://github.com/Blackbox-Enterprises/blackbox-activepieces) | BlackRoad enterprise fork: blackbox-activepieces |
-| [blackbox-huginn](https://github.com/Blackbox-Enterprises/blackbox-huginn) | BlackRoad enterprise fork: blackbox-huginn |
-| [blackbox-airbyte](https://github.com/Blackbox-Enterprises/blackbox-airbyte) | BlackRoad enterprise fork: blackbox-airbyte |
-| [blackbox-temporal](https://github.com/Blackbox-Enterprises/blackbox-temporal) | BlackRoad enterprise fork: blackbox-temporal |
-| [blackbox-n8n](https://github.com/Blackbox-Enterprises/blackbox-n8n) | BlackRoad enterprise fork: blackbox-n8n |
+Blackbox Enterprises is the automation and workflows division of BlackRoad OS. Blackbox Enterprises builds workflow engines, integration platforms, and task orchestration systems. Automation infrastructure that runs on our terms — unlimited executions, full data sovereignty.
 
-<details>
-<summary>Archived</summary>
+All repositories in this organization are proprietary to BlackRoad OS, Inc. Source code is publicly visible for transparency. Commercial use, forking, and redistribution are prohibited.
 
-| Repository | Description |
-|---|---|
+## Parent Organization
 
+This division operates under [BlackRoad-OS-Inc](https://github.com/BlackRoad-OS-Inc), the corporate root of the BlackRoad ecosystem. See the parent org for the full technology stack, product catalog, and organizational structure.
 
-</details>
+## License
+
+Proprietary — BlackRoad OS, Inc. See individual repositories for license terms.
 
 ---
 
-<sub>BlackRoad OS, Inc. — [blackroad.io](https://blackroad.io)</sub>
+**BlackRoad OS — Pave Tomorrow.**
+
+*Copyright 2024-2026 BlackRoad OS, Inc. All Rights Reserved.*
