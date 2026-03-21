@@ -1,25 +1,41 @@
+<div align="center">
+
+<img src="https://images.blackroad.io/pixel-art/road-logo.png" alt="BlackRoad OS" width="80" />
+
 # Blackbox Enterprises
 
-**A division of [BlackRoad OS, Inc.](https://github.com/BlackRoad-OS-Inc) — Proprietary Software**
+**Sovereign automation -- forked, hardened, and self-hosted.**
+
+[![BlackRoad OS](https://img.shields.io/badge/BlackRoad_OS-Pave_Tomorrow-FF2255?style=for-the-badge&labelColor=000000)](https://blackroad.io)
+
+</div>
 
 ---
 
 ## About
 
-Blackbox Enterprises is the automation and workflows division of BlackRoad OS. Blackbox Enterprises builds workflow engines, integration platforms, and task orchestration systems. Automation infrastructure that runs on our terms — unlimited executions, full data sovereignty.
+Blackbox Enterprises maintains hardened forks of critical open-source automation tools. We take best-in-class workflow engines, data pipelines, and orchestration platforms, strip out the cloud dependencies, and deploy them on sovereign infrastructure. Every fork is production-tested on the BlackRoad fleet.
 
-All repositories in this organization are proprietary to BlackRoad OS, Inc. Source code is publicly visible for transparency. Commercial use, forking, and redistribution are prohibited.
+## Repositories
 
-## Parent Organization
+| Repository | Description |
+|------------|-------------|
+| [blackbox-huginn](https://github.com/Blackbox-Enterprises/blackbox-huginn) | Event-driven automation agents (Huginn fork) |
+| [blackbox-n8n](https://github.com/Blackbox-Enterprises/blackbox-n8n) | Visual workflow automation (n8n fork) |
+| [blackbox-temporal](https://github.com/Blackbox-Enterprises/blackbox-temporal) | Durable workflow orchestration (Temporal fork) |
+| [blackbox-airbyte](https://github.com/Blackbox-Enterprises/blackbox-airbyte) | Data integration and ETL pipelines (Airbyte fork) |
+| [blackbox-activepieces](https://github.com/Blackbox-Enterprises/blackbox-activepieces) | No-code automation builder (Activepieces fork) |
 
-This division operates under [BlackRoad-OS-Inc](https://github.com/BlackRoad-OS-Inc), the corporate root of the BlackRoad ecosystem. See the parent org for the full technology stack, product catalog, and organizational structure.
+## Part of BlackRoad OS
 
-## License
+This organization is part of [BlackRoad OS, Inc.](https://blackroad.io) -- sovereign AI infrastructure built by Alexa Amundson.
 
-Proprietary — BlackRoad OS, Inc. See individual repositories for license terms.
+- 16 organizations | 275+ repositories | 20 domains
+- 7 nodes | 41.8 TOPS | 60 AI agents
+- Self-hosted everything. Your AI. Your hardware. Your rules.
 
 ---
 
-**BlackRoad OS — Pave Tomorrow.**
+**BlackRoad OS -- Pave Tomorrow.**
 
-*Copyright 2024-2026 BlackRoad OS, Inc. All Rights Reserved.*
+[blackroad.io](https://blackroad.io) | [git.blackroad.io](https://git.blackroad.io)
