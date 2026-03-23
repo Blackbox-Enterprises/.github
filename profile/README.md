@@ -1,20 +1,19 @@
 # Blackbox-Enterprises
 
-**Enterprise solutions**
+**Automation** — Part of the BlackRoad OS ecosystem.
 
-Part of [BlackRoad OS](https://blackroad.io) — sovereign infrastructure built from bare metal up.
+> 18 orgs · 20 domains · 200 agents · Sovereign infrastructure
+
+6 public repositories | [blackroad.io](https://blackroad.io) | [BlackRoad-OS-Inc](https://github.com/BlackRoad-OS-Inc)
+
+## Key Repositories
+
+- [.github](https://github.com/Blackbox-Enterprises/.github) — Organization-wide configuration for Blackbox-Enterprises[0:60]
+- [blackbox-enterprises.github.io](https://github.com/Blackbox-Enterprises/blackbox-enterprises.github.io) — BlackRoad OS GitHub Pages[0:60]
+- [blackboxprogramming.io](https://github.com/Blackbox-Enterprises/blackboxprogramming.io) — BlackRoad OS — blackboxprogramming.io[0:60]
+- [blackbox-temporal](https://github.com/Blackbox-Enterprises/blackbox-temporal) — BlackBox Temporal — Sovereign durable execution. Fork of Temporal. Long-running workflow orchestration.[0:60]
+- [operator](https://github.com/Blackbox-Enterprises/operator) — Operational root repo for Blackbox-Enterprises. Mirrors the BlackRoad-OS-Inc/blackroad-operator control-plane pattern.[0:60]
 
 ---
 
-| | |
-|---|---|
-| **Parent** | [BlackRoad OS, Inc.](https://github.com/BlackRoad-OS-Inc) |
-| **Website** | [blackroad.io](https://blackroad.io) |
-| **Search** | [search.blackroad.io](https://search.blackroad.io) |
-| **Org Page** | [blackbox-enterprises.github.io](https://blackbox-enterprises.github.io) |
-
----
-
-> Built by [Alexa Amundson](https://blackroad.me). Delaware C-Corp. Founded November 2025.
-> 
-> 23 orgs · 2,280+ repos · 29 languages · 7 nodes · 52 TOPS
+Proprietary — BlackRoad OS, Inc. All rights reserved.
